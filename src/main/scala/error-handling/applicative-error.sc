@@ -7,7 +7,7 @@ import java.util.UUID
 import scala.util.control.NoStackTrace
 
 /**
- * Either Vs ApplicativeError
+ * ApplicativeError
  */
 
 /**
