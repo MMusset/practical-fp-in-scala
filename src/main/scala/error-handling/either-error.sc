@@ -69,7 +69,7 @@ val canSayHi = true
 
 val users: Users[IO] = Users.make[IO](adminUser, canSayHi)
 
-// Chaos, when dependancy of side effects is involved
+// Chaos, when dependency of side effects is involved
 val program1: IO[Object] = for {
   user <- users.findUser(findUser)
   result = user match {
@@ -86,7 +86,7 @@ val program1: IO[Object] = for {
 program1.unsafeRunSync()
 
 // Explicit Error Handling
-// When independant side effects
+// When independent side effects
 val program2 = {
   users.findUser(findUser).flatMap { eitherA: Either[UserNotFound, User] =>
     users.sayHi(findUser).flatMap { eitherB: Either[UserCanNotSayHi, Unit] =>
