@@ -1,18 +1,16 @@
 import cats.effect.IO
 import cats.effect.unsafe.implicits.global
-import fs2.{Pure, Stream}
-import shapeless.the
-
+import fs2.{ Pure, Stream }
 
 // Creates a singleton pure stream that emits the supplied value.
 val s1: Stream[Pure, Int] = Stream.emit(1)
 s1.toList
 
 /**
- * This effect, executes a side effect by printing and then returns a number as a result.
- * Imagine a database INSERT, that returns a 1 for success or 0 for failure.
+ * This effect, executes a side effect by printing and then returns a number as a result. Imagine a database INSERT,
+ * that returns a 1 for success or 0 for failure.
  */
-val eff1: IO[Int] =  IO {
+val eff1: IO[Int] = IO {
   println("BEING RUN!!")
   1 + 1
 }
@@ -20,12 +18,10 @@ val eff1: IO[Int] =  IO {
 /**
  * Notice this stream in not pure.
  *
- * val s1: Stream[Pure, Int] = Stream.emit(1)
- * val es1: Stream[IO, Int] = Stream.eval(eff1)
+ * val s1: Stream[Pure, Int] = Stream.emit(1) val es1: Stream[IO, Int] = Stream.eval(eff1)
  *
- * This is a stream which contains multiple IOs.
- * They are descriptions of side effects, but do not execute.
- * ie. Stream(getDbRecordIO, insertDbRecordIO, getDbRecordIO)
+ * This is a stream which contains multiple IOs. They are descriptions of side effects, but do not execute. ie.
+ * Stream(getDbRecordIO, insertDbRecordIO, getDbRecordIO)
  */
 val effs1: Stream[IO, Int] = Stream.eval(eff1)
 
